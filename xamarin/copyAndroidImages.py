@@ -16,7 +16,10 @@ args = parser.parse_args()
 print args
 
 def matchDensity(resourcesPath, density, file):
-    if density in file:
+    prefixedDensity = '_' + density
+    if prefixedDensity in file:
+        return join(resourcesPath, 'drawable-' + density, file.replace(prefixedDensity, ''))
+    elif density in file:
         return join(resourcesPath, 'drawable-' + density, file.replace(density, ''))
     return False
 
