@@ -38,12 +38,14 @@ def isExcluded(file):
     return 'notmatched' in file[1] or 'ldpi' in file[1]
 
 def performCopy(files, dryRun):
+    copyWording = 'would copy' if dryRun else 'copying'
     for file in files:
         if isExcluded(file):
             print "[EXCLUDED] " + file[0]
             continue
 
-        print 'copy ' + file[0] + ' to ' + file[1]
+	
+        print copyWording + ' ' + file[0] + ' to ' + file[1]
 
         if not dryRun:
             copyfile(file[0], file[1])
@@ -51,4 +53,7 @@ def performCopy(files, dryRun):
 
 files = [(join(args.src, f), getDestination(args.dest, f)) for f in listdir(args.src) if isfile(join(args.src, f)) and not f.endswith('.svg')]
 
+
+print '**Start**' if args.run else '**Dry-run Start**'
 performCopy(files, not args.run)
+print '**End**' if args.run else '**Dry-run End**'
