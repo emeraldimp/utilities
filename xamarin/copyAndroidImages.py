@@ -35,7 +35,7 @@ def getDestination(resourcesPath, file):
     return destination
 
 def isExcluded(file):
-    return 'notmatched' in file[1] or 'ldpi' in file[1]
+    return 'notmatched' in file[1] or 'ldpi' in file[1] or 'xxxhdpi' in file[1]
 
 def performCopy(files, dryRun):
     copyWording = 'would copy' if dryRun else 'copying'
